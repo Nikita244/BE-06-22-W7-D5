@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+
+<title>Allarme 2</title>
+<style>
+body {
+	margin: 0;
+	padding: 0;
+	background-color:darkgray;
+	background-image: url('https://img.freepik.com/free-photo/blurred-abstract-background-interior-view-looking-out-toward-empty-office-lobby-entrance-doors-glass-curtain-wall-with-frame_1339-6358.jpg?w=900&t=st=1677446344~exp=1677446944~hmac=799e534ed4130dd47bb0ab1fa4034377e0fdba54694b2353ac4363044a2f3ffe');
+	background-repeat: no-repeat;
+background-size: 250%;
+background-position: center;
+
+	
+}
+
+.spinner-wrapper {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 999;
+	background-color: #212529;
+
+}
+
+.spinner {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-size: 36px;
+	color: #333;
+	padding:30px;
+
+}
+
+
+
+.content {
+	padding: 120px;
+	color: white;
+	text-align: center;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+
+}
+
+.content.hidden {
+	display: none;
+}
+
+.content p {
+	font-size: 24px;
+}
+.spinner p{
+text-align:center;
+padding-top:20px;
+font-weight:bold;
+color:white;
+}
+.monitor {
+    background: #000 none repeat scroll 0 0;
+    border: 20px solid #cfcfd4;
+    border-radius: 40px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    margin: 7% 7% 0 7%;
+    padding: 40px;
+}
+.monitorstand {
+    background-clip: border-box;
+    background-color: transparent;
+    background-image: url("https://cdn.haeckdesign.com/images/style/monitorstand.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: 130px;
+    padding-bottom: 5%;
+   
+}
+
+ul.monitor {
+    background: #212121 none repeat scroll 0 0;
+    border-radius: 2px;
+    color: #ddd;
+    font-size: 25px;
+    list-style: outside none none;
+    padding-right:20px;
+    padding-top:30px;
+     padding-bottom:90px;
+    text-align: left;
+    line-height: 50px;
+}
+
+h1 {
+  color: #fff;
+  width: 200px;
+  padding: .6em;
+  text-shadow: 0 0 2px #000;
+  -moz-animation-duration: 1.2s;
+  -webkit-animation-duration: 1.2s;
+  -moz-animation-name: bgcolor;
+  -webkit-animation-name: bgcolor;
+  -moz-animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
+  border-radius: 50px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.6),
+              inset 0 -6px 30px #777,
+              inset 0 6px 10px rgba(255,255,255,0),
+              0 16px 50px rgba(255,255,255,0),
+              0 18px 60px rgba(255,0,0,0);
+  border-top: 1px #aaa solid;
+  } 
+@-moz-keyframes bgcolor {
+    from {
+      color: #777;
+      background: #444;
+    }
+    50% {
+      color: #fff;
+      background: red;
+      box-shadow: 0 6px 20px rgba(0,0,0,1),
+                  inset 0 -6px 30px #777,
+                  inset 0 6px 10px rgba(255,255,255,0.6),
+                  0 16px 50px rgba(255,255,255,0.6),
+                  0 18px 60px rgba(255,0,0,0.4);
+    }
+    to {
+      color: #777;
+      background: #444;
+    }
+  }   
+@-webkit-keyframes bgcolor {
+    from {
+      color: #777;
+      background: #444;
+    }
+    50% {
+      color: #fff;
+      background: red;
+      box-shadow: 0 6px 20px rgba(0,0,0,1),
+                  inset 0 -6px 30px #777,
+                  inset 0 6px 10px rgba(255,255,255,0.6),
+                  0 16px 50px rgba(255,255,255,0.6),
+                  0 18px 60px rgba(255,0,0,0.4);
+    }
+    to {
+      color: #777;
+      background: #444;
+    }
+  }
+
+h1:hover {
+  cursor: pointer;
+}
+
+#title {
+  padding: 0;
+  color: red;
+  font-size: 35px;
+  font-weight: bold;
+  animation: blink 1.3s infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+		
+	</style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <div class="container-fluid">
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/sonde" >Visualizza sonde</a>
+        </li>
+
+       <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Invia allarme
+      </a>
+      <ul class="dropdown-menu dropdown-menu-dark">
+        <li><a class="dropdown-item" href="/allarme1/genova_centro" target="_blank">Sonda 1</a></li>
+        <li><a class="dropdown-item" href="/allarme2/la_spezia"  target="_blank">Sonda 2</a></li>
+       	        <li><a class="dropdown-item" href="/allarme6/genova_areoporto"  target="_blank">Sonda 6</a></li>
+      </ul>
+    </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<main>
+
+	<div class="spinner-wrapper">
+		<div class="spinner">
+		<br>
+		  <h1>ALERT</h1>
+			<p>Inviando allarme al centro operativo</p>
+			<p>Attendi...</p>
+		</div>
+	</div>
+	<div class="content hidden">
+	<ul class="monitor">
+	<li id="title">ALLARME RICEVUTO DA:</li>
+	<br>
+   
+</ul>
+<div class="monitorstand"></div>
+	</div>
+
+
+
+
+
+
+	</main>
+	
+	<script>
+	
+	setTimeout(function() {
+		document.querySelector('.spinner-wrapper').style.display = 'none';
+		document.querySelector('.content').classList.remove('hidden');
+	}, 5000);
+	
+	fetch("http://localhost:8080/alarm?idsonda=2&lat=44.1072811&lon=9.801819&smokelevel=6")
+	  .then(resp => resp.json())
+	  .then(sonda => {
+	    // Selezione il monitor esistente nella pagina
+	    const monitor = document.querySelector(".monitor");
+
+	    // Creo un nuovo elemento li per la lista
+	    const li = document.createElement("li");
+	    li.style.fontWeight = "semi-bold";
+	    
+	    // Creo l'icona per la latitudine
+	     const iconSond = document.createElement("i");
+	    iconSond.classList.add("bi", "bi-broadcast-pin");
+	    
+	    const iconLat = document.createElement("i");
+	    iconLat.classList.add("bi", "bi-geo-fill");
+	    
+	    const iconLon = document.createElement("i");
+	    iconLon.classList.add("bi", "bi-geo-fill");
+	    
+	    const iconFire = document.createElement("i");
+	    iconFire.classList.add("bi", "bi-fire");
+	    
+	    const iconTime = document.createElement("i");
+	    iconTime.classList.add("bi", "bi-clock");
+	    
+	   
+	    
+	   
+
+	    // Creo il testo da aggiungere al nuovo elemento li
+	    const testo1 = document.createTextNode(` Sonda numero: ${sonda.id}`);
+	    const testo2 = document.createTextNode(` Latitudine: ${sonda.latitudine}`);
+	    const testo3 = document.createTextNode(` Longitudine: ${sonda.longitudine}`);
+	    const testo4 = document.createTextNode(` Livello di fumo: ${sonda.livelloFumo}`);
+	    const testo5 = document.createTextNode(` Ultimo aggiornamento: ${new Date().toLocaleString()}`);
+	    
+
+	    // Aggiungo i testi all'elemento li
+	    li.appendChild(iconSond);
+	    li.appendChild(testo1);
+	    li.appendChild(document.createElement("br"));
+	    li.appendChild(iconLat);
+	    li.appendChild(testo2);
+	    li.appendChild(document.createElement("br"));
+	    li.appendChild(iconLon);
+	    li.appendChild(testo3);
+	    li.appendChild(document.createElement("br"));
+	    li.appendChild(iconFire);
+	    li.appendChild(testo4);
+	    li.appendChild(document.createElement("br"));
+	    li.appendChild(iconTime);
+	    li.appendChild(testo5);
+
+	    // Aggiungo l'elemento li alla lista
+	    monitor.appendChild(li);
+	  })
+	  .catch(err => console.error(err));
+
+
+    </script>
+	
+</body>
+</html>
